@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:follow_dp/constants/constants.dart';
+import 'package:follow_dp/views/pages/view_photo.dart';
+
+class ProfilePhoto extends StatefulWidget {
+  final double radius;
+
+  const ProfilePhoto({super.key, required this.radius});
+
+  @override
+  State<ProfilePhoto> createState() => _ProfilePhotoState();
+}
+
+class _ProfilePhotoState extends State<ProfilePhoto> {
+  @override
+  Widget build(BuildContext context) {
+    var defaultImgUrl =
+        "https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg";
+
+    var isPhotoUrl = false;
+    var photoUrl;
+
+    if (firebaseAuth.currentUser!.photoURL != null) {
+      setState(() {
+        isPhotoUrl = true;
+        photoUrl = firebaseAuth.currentUser!.photoURL;
+      });
+    }
+    return Stack(children: [
+      InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, "viewPhoto");
+        },
+        child: CircleAvatar(
+          radius: widget.radius,
+          backgroundImage:
+              isPhotoUrl ? NetworkImage(photoUrl) : NetworkImage(defaultImgUrl),
+        ),
+      ),
+      Positioned(
+        bottom: -widget.radius * 0.2,
+        left: widget.radius * 1.25,
+        child: IconButton(
+          onPressed: () {
+            setState(() {
+              photoUrl = authController.pickImage();
+            });
+          },
+          icon: const Icon(
+            Icons.add_a_photo,
+            color: Colors.black,
+          ),
+        ),
+      )
+    ]);
+  }
+}

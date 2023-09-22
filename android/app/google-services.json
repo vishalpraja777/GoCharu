@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "958147611840",
+    "project_id": "followdp1",
+    "storage_bucket": "followdp1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958147611840:android:0897c08a65ee8b3a00b125",
+        "android_client_info": {
+          "package_name": "com.example.follow_dp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSA-VHJkl3jqXe_jL8ucG9rmzoJXh2HZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
