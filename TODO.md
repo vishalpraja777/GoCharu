@@ -17,9 +17,3 @@
 - Photo upload
 
 # Link Feed
-- Make link model
-
-- Sign Up page
-- Forgot Password
-- Google Signin
-- Home Page UI

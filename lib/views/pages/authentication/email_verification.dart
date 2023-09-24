@@ -57,10 +57,18 @@ class _EmailVerificationState extends State<EmailVerification> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Verifying your Email:",
+                  const Text(
+                    "A verification link",
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "has been sent to your mail",
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    "Check and verify your Email:",
+                  ),
+                  const SizedBox(height: 10),
                   Text(firebaseAuth.currentUser!.email!),
                   const SizedBox(height: 20),
                   SizedBox(
