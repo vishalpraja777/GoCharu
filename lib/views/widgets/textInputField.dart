@@ -7,6 +7,7 @@ class TextInputField extends StatelessWidget {
   final bool isObscure;
   final IconData icon;
   final bool signup;
+  final bool numberic;
 
   const TextInputField(
       {super.key,
@@ -14,7 +15,8 @@ class TextInputField extends StatelessWidget {
       required this.labelText,
       this.isObscure = false,
       required this.icon,
-      required this.signup});
+      this.signup = false,
+      this.numberic = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class TextInputField extends StatelessWidget {
           )
         : TextField(
             controller: controller,
+            keyboardType: numberic ? TextInputType.phone : TextInputType.text,
             decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,

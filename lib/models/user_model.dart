@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel {
   final String? uid;
-  // final String? profilePhoto;
+  final String? profilePhoto;
   final String username;
   final String dob;
   final String email;
@@ -12,7 +12,7 @@ class UserModel {
 
   UserModel(
       {this.uid,
-      // this.profilePhoto,
+      this.profilePhoto,
       required this.username,
       required this.dob,
       required this.email,
@@ -22,7 +22,7 @@ class UserModel {
   Map<String, dynamic> toJson() {
     return {
       "uid": uid,
-      // "profilePhoto": profilePhoto,
+      "profilePhoto": profilePhoto,
       "username": username,
       "dob": dob,
       "email": email,
@@ -36,7 +36,7 @@ class UserModel {
     return UserModel(
         uid: snapshot['uid'],
         email: snapshot['email'],
-        // profilePhoto: snapshot['profilePhoto'],
+        profilePhoto: snapshot['profilePhoto'],
         username: snapshot['username'],
         dob: snapshot['dob'],
         phoneNumber: snapshot['phoneNumber'],

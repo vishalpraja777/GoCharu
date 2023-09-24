@@ -43,9 +43,11 @@ dependencies:
   google_fonts: ^6.0.0
   google_sign_in: ^6.1.5
   image_picker: ^1.0.4
+  loading_animation_widget: ^1.2.0+4
   pinput: ^3.0.1
   shared_preferences: ^2.2.1
   simple_animations: ^5.0.2
+  table_calendar: ^3.0.9
   url_launcher: ^6.1.14
 
 # flutter_native_splash:
@@ -76,6 +78,14 @@ flutter:
     - assets/images/logincrop.png
     - assets/images/googlelogo.png
     - assets/images/applogo.png
+    - assets/images/cardbackground1.jpg
+    - assets/images/cardbackground2.jpg
+    - assets/images/cardbackground3.jpg
+    - assets/images/cardbackground4.jpg
+    - assets/images/cardbackground5.jpg
+    - assets/images/cardbackground6.jpg
+    - assets/images/cardbackground7.jpg
+    - assets/images/cardbackground8.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

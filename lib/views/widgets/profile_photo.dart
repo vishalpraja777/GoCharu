@@ -4,8 +4,10 @@ import 'package:follow_dp/views/pages/view_photo.dart';
 
 class ProfilePhoto extends StatefulWidget {
   final double radius;
+  final bool isEditable;
 
-  const ProfilePhoto({super.key, required this.radius});
+  const ProfilePhoto(
+      {super.key, required this.radius, this.isEditable = false});
 
   @override
   State<ProfilePhoto> createState() => _ProfilePhotoState();
@@ -19,6 +21,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
 
     var isPhotoUrl = false;
     var photoUrl;
+    var isEditable;
 
     if (firebaseAuth.currentUser!.photoURL != null) {
       setState(() {
@@ -38,20 +41,21 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
         ),
       ),
       Positioned(
-        bottom: -widget.radius * 0.2,
-        left: widget.radius * 1.25,
-        child: IconButton(
-          onPressed: () {
-            setState(() {
-              photoUrl = authController.pickImage();
-            });
-          },
-          icon: const Icon(
-            Icons.add_a_photo,
-            color: Colors.black,
-          ),
-        ),
-      )
+          bottom: -widget.radius * 0.2,
+          left: widget.radius * 1.25,
+          child: widget.isEditable
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      photoUrl = authController.pickImage();
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  ),
+                )
+              : Container())
     ]);
   }
 }

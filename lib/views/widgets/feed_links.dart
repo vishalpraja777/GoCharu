@@ -31,11 +31,26 @@ class FeedLinks extends StatelessWidget {
                     onTap: () {
                       _launchUrl(documentSnapshot["link"]);
                     },
-                    child: Card(
-                      margin: const EdgeInsets.all(10),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 4),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: const DecorationImage(
+                              image: AssetImage(cardbackground6),
+                              fit: BoxFit.cover)),
                       child: ListTile(
-                        title: Text(documentSnapshot["name"]),
-                        subtitle: Text(documentSnapshot["link"]),
+                        title: Center(
+                          child: Text(
+                            documentSnapshot["name"].toString().toUpperCase(),
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        // subtitle: Text(documentSnapshot["link"]),
                       ),
                     ),
                   );

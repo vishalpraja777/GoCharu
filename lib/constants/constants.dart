@@ -11,7 +11,8 @@ const backgroundColor = Colors.black;
 // var buttonColor = const Color.fromARGB(255, 0, 165, 39);
 const borderColor = Colors.grey;
 // const lightBlack1 = Color.fromRGBO(0, 255, 85, 1.0);
-const primaryColor = Colors.orange;
+const primaryColor = Colors.blue;
+const white = Colors.white;
 
 // Images
 
@@ -23,6 +24,15 @@ const String register = "assets/images/register.png";
 const String logincrop = "assets/images/logincrop.png";
 const String googlelogo = "assets/images/googlelogo.png";
 const String applogo = "assets/images/applogo.png";
+
+const String cardbackground1 = "assets/images/cardbackground1.jpg";
+const String cardbackground2 = "assets/images/cardbackground2.jpg";
+const String cardbackground3 = "assets/images/cardbackground3.jpg";
+const String cardbackground4 = "assets/images/cardbackground4.jpg";
+const String cardbackground5 = "assets/images/cardbackground5.jpg";
+const String cardbackground6 = "assets/images/cardbackground6.jpg";
+const String cardbackground7 = "assets/images/cardbackground7.jpg";
+const String cardbackground8 = "assets/images/cardbackground8.jpg";
 
 var firebaseAuth = FirebaseAuth.instance;
 var firebaseStorage = FirebaseStorage.instance;

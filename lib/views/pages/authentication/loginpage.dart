@@ -1,9 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:follow_dp/constants/constants.dart';
-import 'package:follow_dp/views/widgets/input_text_field.dart';
+import 'package:follow_dp/views/pages/loading_screen.dart';
 import 'package:follow_dp/views/widgets/textInputField.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -16,26 +15,38 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
+  bool isLoadingButton = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(color: Colors.orange),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            Positioned(top: 80, child: _buildTop()),
-            Positioned(bottom: 0, child: _buildBottom()),
-          ],
-        ),
-      ),
-    );
+    return isLoading
+        ? const LoadingScreen()
+        : Container(
+            decoration: const BoxDecoration(color: primaryColor),
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Column(
+                  children: [_buildTop(), _buildBottom()],
+                )
+                // Stack(
+                //   children: [
+                //     Positioned(top: 80, child: _buildTop()),
+                //     Align(
+                //       alignment: Alignment.bottomCenter,
+                //       child: SingleChildScrollView(child: _buildBottom()),
+                //     ),
+                //   ],
+                // ),
+                ),
+          );
   }
 
   Widget _buildTop() {
-    return SizedBox(
+    return Container(
+      // height: MediaQuery.of(context).size.height * 0.2,
       width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(top: 50, bottom: 20),
       child: Column(
         children: [
           Image(
@@ -57,14 +68,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildBottom() {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Card(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
+    return Expanded(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Card(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30))),
           child: _buildForm(),
         ),
       ),
@@ -72,96 +82,141 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildForm() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Welcome",
-          style: TextStyle(
-              color: Colors.orange, fontSize: 32, fontWeight: FontWeight.bold),
-        ),
-        _buildGreyText("Please login with your credentials"),
-        const SizedBox(
-          height: 50,
-        ),
-        // Email input
-        TextInputField(
-          controller: _emailController,
-          labelText: "Email",
-          icon: Icons.email,
-          signup: false,
-          isObscure: false,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        // Password Input
-        TextInputField(
-          controller: _passwordController,
-          labelText: "Password",
-          icon: Icons.lock,
-          signup: false,
-          isObscure: true,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        // Forgot Password
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton(
-                onPressed: () {}, child: _buildGreyText("Forgot Password")),
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        // Login Button
-        Center(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () async {
-                bool login = await authController.loginUser(
-                    _emailController.text, _passwordController.text);
-                if (login) {
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, "emailVerification", (route) => false);
-                }
-              },
-              // style: ElevatedButton.styleFrom(),
-              child: const Text(
-                "Login",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+            const Text(
+              "Welcome",
+              style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold),
+            ),
+            _buildGreyText("Please login with your credentials"),
+            const SizedBox(
+              height: 40,
+            ),
+            // Email input
+            TextInputField(
+              controller: _emailController,
+              labelText: "Email",
+              icon: Icons.email,
+              signup: false,
+              isObscure: false,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            // Password Input
+            TextInputField(
+              controller: _passwordController,
+              labelText: "Password",
+              icon: Icons.lock,
+              signup: false,
+              isObscure: true,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            // Forgot Password
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "forgotPasswordScreen");
+                    },
+                    child: _buildGreyText("Forgot Password?")),
+              ],
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            // Login Button
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoadingButton = true;
+                    });
+                    bool login = await authController.loginUser(
+                        _emailController.text, _passwordController.text);
+                    if (login) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "emailVerification", (route) => false);
+                    }
+                    setState(() {
+                      isLoadingButton = false;
+                    });
+                  },
+                  // style: ElevatedButton.styleFrom(),
+                  child: isLoadingButton
+                      ? LoadingAnimationWidget.horizontalRotatingDots(
+                          color: Colors.white, size: 30)
+                      : const Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                ),
               ),
             ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildGreyText("Already have an account?"),
-            TextButton(
-              onPressed: () {
-                print("Navigating User");
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'signuppage', (route) => false);
-              },
-              child: const Text(
-                "Sign Up",
-                style: TextStyle(color: Colors.orange, fontSize: 16),
-              ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _buildGreyText("Don't have an account?"),
+                TextButton(
+                  onPressed: () {
+                    print("Navigating User");
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, 'signuppage', (route) => false);
+                  },
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 16,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              ],
             ),
+            Center(child: _buildGreyText("Or Login with")),
+            const SizedBox(height: 10),
+            Center(
+                child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(50)),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: IconButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    var res = await authController.googleSignIn();
+                    if (res != null) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "homepage", (route) => false);
+                      // print("res: " + res.toString());
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  },
+                  icon: Image.asset(googlelogo)),
+            )),
           ],
         ),
-        Center(child: _buildGreyText("Or Login with")),
-        Center(
-            child: IconButton(onPressed: () {}, icon: Image.asset(googlelogo))),
-      ],
+      ),
     );
   }
 

@@ -1,8 +1,12 @@
 // import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:follow_dp/controller/auth_controller.dart';
+import 'package:follow_dp/views/pages/loading_screen.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:table_calendar/table_calendar.dart';
 // import 'package:image_picker/image_picker.dart';
 
 import '../../../constants/constants.dart';
@@ -23,11 +27,342 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
 
+  String genderValue = "Male";
+  List<String> genderList = <String>["Male", "Female", "Other"];
+
+  DateTime dateTime = DateTime.now();
+  String strDateTime = '--/--/----';
+
+  bool isLoading = false;
+  bool isLoadingButton = false;
+
   // static AuthController instance = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    // strDateTime = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+
+    return isLoading
+        ? const LoadingScreen()
+        : Container(
+            decoration: const BoxDecoration(color: primaryColor),
+            child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Column(
+                  children: [_buildTop(), _buildBottom()],
+                )
+                // Stack(
+                //   children: [
+                //     Positioned(top: 80, child: _buildTop()),
+                //     Align(
+                //       alignment: Alignment.bottomCenter,
+                //       child: _buildBottom(),
+                //     ),
+                //   ],
+                // ),
+                ),
+          );
+  }
+
+  Widget _buildTop() {
     return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(top: 50, bottom: 20),
+      child: Column(
+        children: [
+          Image(
+            image: const AssetImage(applogo),
+            width: MediaQuery.of(context).size.width * 0.2,
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            "Go Charu",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 40,
+                letterSpacing: 2),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottom() {
+    return Expanded(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Card(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+          child: _buildForm(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildForm() {
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.only(top: 32, left: 32, right: 32, bottom: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              "Create an Account",
+              style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold),
+            ),
+            _buildGreyText("Please login with your credentials"),
+            const SizedBox(
+              height: 40,
+            ),
+            // Name Input
+            TextInputField(
+              controller: _userNameController,
+              labelText: "Name",
+              icon: Icons.person,
+              signup: false,
+              isObscure: false,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            // Email input
+            TextInputField(
+              controller: _emailController,
+              labelText: "Email",
+              icon: Icons.email,
+              signup: false,
+              isObscure: false,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            // gender input
+            _dropDownList(),
+            const SizedBox(
+              height: 20,
+            ),
+            // Phone Input
+            TextInputField(
+              controller: _phoneNumberController,
+              labelText: "Phone Number",
+              icon: Icons.phone,
+              signup: false,
+              numberic: true,
+              isObscure: false,
+            ),
+            const SizedBox(height: 20),
+            // DOB Input
+            _datePicker(context),
+            const SizedBox(height: 20),
+            // DOB Input
+            // TextInputField(
+            //   controller: _dobController,
+            //   labelText: "DOB",
+            //   icon: Icons.cake,
+            //   signup: false,
+            //   isObscure: false,
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // Password Input
+            TextInputField(
+              controller: _passwordController,
+              labelText: "Password",
+              icon: Icons.lock,
+              signup: false,
+              isObscure: true,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            // Forgot Password
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     TextButton(
+            //         onPressed: () {}, child: _buildGreyText("Forgot Password")),
+            //   ],
+            // ),
+            // Login Button
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoadingButton = true;
+                    });
+                    _genderController.text = genderValue;
+                    bool signup = await authController.registerUser(
+                        _userNameController.text,
+                        _emailController.text,
+                        _passwordController.text,
+                        // authController.profilePhoto,
+                        _phoneNumberController.text,
+                        _genderController.text,
+                        _dobController.text);
+                    setState(() {
+                      isLoadingButton = false;
+                    });
+                    if (signup) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "emailVerification", (route) => false);
+                    }
+                  },
+                  // style: ElevatedButton.styleFrom(),
+                  child: isLoadingButton
+                      ? LoadingAnimationWidget.horizontalRotatingDots(
+                          color: Colors.white, size: 30)
+                      : const Text(
+                          "Register",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _buildGreyText("Already have an account?"),
+                TextButton(
+                  onPressed: () {
+                    print("Navigating User");
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, 'loginPage', (route) => false);
+                  },
+                  child: const Text(
+                    "Sign In",
+                    style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 16,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              ],
+            ),
+            Center(child: _buildGreyText("Or Login with")),
+            const SizedBox(height: 10),
+            Center(
+                child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(50)),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: IconButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    var res = await authController.googleSignIn();
+                    if (res != null) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "homepage", (route) => false);
+                      // print("res: " + res.toString());
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  },
+                  icon: Image.asset(googlelogo)),
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGreyText(String text) {
+    return Text(
+      text,
+      style: const TextStyle(color: Colors.grey),
+    );
+  }
+
+  Widget _dropDownList() {
+    return DropdownButtonFormField<String>(
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(16), // Remove internal padding
+        border: OutlineInputBorder(
+          // Customize the border
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+      ),
+      isExpanded: true,
+      value: genderValue,
+      items: genderList
+          .map<DropdownMenuItem<String>>(
+              (String value) => DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  ))
+          .toList(),
+      onChanged: (String? value) {
+        setState(() {
+          genderValue = value!;
+        });
+      },
+    );
+  }
+
+  Widget _datePicker(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("DOB: $strDateTime"),
+          SizedBox(
+              child: ElevatedButton(
+                  onPressed: () {
+                    showCupertinoModalPopup(
+                        context: context,
+                        builder: (context) => showCupertinoDatePicker(context));
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
+                      child: const Text("Choose DOB"))))
+        ],
+      ),
+    );
+  }
+
+  showCupertinoDatePicker(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+          color: Colors.white),
+      height: 250,
+      child: CupertinoDatePicker(
+        // backgroundColor: Colors.white,
+        initialDateTime: dateTime,
+        maximumDate: DateTime.now(),
+        mode: CupertinoDatePickerMode.date,
+        onDateTimeChanged: (DateTime newTime) {
+          setState(() {
+            dateTime = newTime;
+            strDateTime = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+            _dobController.text = strDateTime;
+          });
+        },
+      ),
+    );
+  }
+
+  /* Container(
         decoration: const BoxDecoration(
             // color: Colors.white,
             image:
@@ -129,9 +464,9 @@ class _SignupPageState extends State<SignupPage> {
               )
             ],
           ),
-        ));
+        ));*/
 
-    /*Scaffold(
+  /*Scaffold(
         body: Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 35, 20, 10),
@@ -316,5 +651,4 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     ));*/
-  }
 }

@@ -25,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: primaryColor,
       body: Stack(
         children: [
           AnimatedPositioned(
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
               left: animate ? (size.width - 150) / 2 : (size.width - 50) / 2,
               duration: const Duration(milliseconds: 1600),
               width: animate ? 150.0 : 50.0,
-              child: const Image(image: AssetImage(logo), width: 150))
+              child: const Image(image: AssetImage(applogo), width: 150))
         ],
       ),
     );

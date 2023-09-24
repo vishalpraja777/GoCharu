@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/models/user_model.dart';
 // import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 // import 'package:follow_dp/views/pages/homepage.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -51,8 +53,44 @@ class AuthController extends GetxController {
       _pickedImage = Rx<File?>(File(pickedImage!.path));
       String downloadUrl = await _uploadToStorage(profilePhoto!);
       firebaseAuth.currentUser?.updatePhotoURL(downloadUrl);
+
+      // update user model
+      updateProfileWithPhoto(downloadUrl);
+      // UserModel userData =
+      //     await crudController.getUserDetails(firebaseAuth.currentUser!.email!);
+      // UserModel userModel = UserModel(
+      //     uid: firebaseAuth.currentUser!.uid,
+      //     username: userData.username,
+      //     dob: userData.dob,
+      //     email: userData.email,
+      //     phoneNumber: userData.phoneNumber,
+      //     gender: userData.gender,
+      //     profilePhoto: downloadUrl);
+
+      // crudController.updateProfile(userModel);
+
       return downloadUrl;
     }
+  }
+
+  updateProfileWithPhoto(String photoUrl) async {
+    if (photoUrl == '') {
+      await firebaseAuth.currentUser!.updatePhotoURL(null);
+    } else {
+      await firebaseAuth.currentUser!.updatePhotoURL(photoUrl);
+    }
+    UserModel userData =
+        await crudController.getUserDetails(firebaseAuth.currentUser!.email!);
+    UserModel userModel = UserModel(
+        uid: firebaseAuth.currentUser!.uid,
+        username: userData.username,
+        dob: userData.dob,
+        email: userData.email,
+        phoneNumber: userData.phoneNumber,
+        gender: userData.gender,
+        profilePhoto: photoUrl);
+
+    crudController.updateProfile(userModel);
   }
 
   // upload to firebase storage
@@ -111,7 +149,7 @@ class AuthController extends GetxController {
             email: email,
             phoneNumber: phoneNumber,
             gender: gender,
-            // profilePhoto: downloadUrl,
+            profilePhoto: '',
             uid: cred.user!.uid);
 
         await firestore
@@ -150,6 +188,54 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Fluttertoast.showToast(msg: "Error Logging in");
+      return false;
+    }
+  }
+
+  googleSignIn() async {
+    try {
+      // begin interactive sign in process
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+      // obtain auth details from request
+      final GoogleSignInAuthentication gAuth = await gUser!.authentication;
+      // create a new credential for user
+      final credential = GoogleAuthProvider.credential(
+          accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+
+      // finally let's sign in
+      var signinRes =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      if (signinRes.additionalUserInfo!.isNewUser) {
+        UserModel user = UserModel(
+            username: signinRes.user!.displayName!,
+            dob: '',
+            email: signinRes.user!.email!,
+            phoneNumber: '',
+            gender: '',
+            profilePhoto: '',
+            uid: signinRes.user!.uid);
+
+        await firestore
+            .collection("users")
+            .doc(signinRes.user!.uid)
+            .set(user.toJson());
+      }
+      print(signinRes.user!.uid);
+      return signinRes;
+    } catch (error) {
+      Fluttertoast.showToast(
+          msg: "Email maybe already registered! Try logging in");
+      return null;
+    }
+  }
+
+  Future resetPassword(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+      Fluttertoast.showToast(msg: 'Password Reset Email Sent');
+      return true;
+    } catch (error) {
+      Fluttertoast.showToast(msg: 'Enter a valid Email');
       return false;
     }
   }

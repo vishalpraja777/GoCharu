@@ -27,7 +27,7 @@ class _EmailVerificationState extends State<EmailVerification> {
     if (!isEmailVerified) {
       authController.sendVerificationEmail();
 
-      timer = Timer.periodic(Duration(seconds: 2), (timer) {
+      timer = Timer.periodic(const Duration(seconds: 2), (timer) {
         checkEmailVerified();
       });
     }
@@ -58,20 +58,31 @@ class _EmailVerificationState extends State<EmailVerification> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Verifying...",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    "Verifying your Email:",
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        authController.sendVerificationEmail();
-                      },
-                      child: Text("Resend Verification Mail")),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            "loginPage", (route) => false);
-                      },
-                      child: Text("Use different email"))
+                  SizedBox(height: 10),
+                  Text(firebaseAuth.currentUser!.email!),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width - 100,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          authController.sendVerificationEmail();
+                        },
+                        child: const Text("Resend Verification Mail")),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width - 100,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              "loginPage", (route) => false);
+                        },
+                        child: const Text("Use different email")),
+                  )
                 ],
               ),
             ),

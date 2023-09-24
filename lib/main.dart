@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/controller/auth_controller.dart';
 import 'package:follow_dp/controller/crud_crontroller.dart';
@@ -7,7 +8,9 @@ import 'package:follow_dp/controller/firebase_api_messaging.dart';
 import 'package:follow_dp/theme/app_theme.dart';
 import 'package:follow_dp/views/pages/authentication/email_verification.dart';
 import 'package:follow_dp/views/pages/authentication/signuppage.dart';
+import 'package:follow_dp/views/pages/forgot_password_screen.dart';
 import 'package:follow_dp/views/pages/homepage.dart';
+import 'package:follow_dp/views/pages/loading_screen.dart';
 import 'package:follow_dp/views/pages/onboarding_page.dart';
 import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 import 'package:follow_dp/views/pages/authentication/phone_verification/otp_verification.dart';
@@ -32,6 +35,11 @@ void main() async {
   });
   await FirebaseApiMeaasging().initNoifications();
 
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const MyApp());
 }
 
@@ -55,13 +63,14 @@ class MyApp extends StatelessWidget {
         'emailVerification': (context) => const EmailVerification(),
         'updateProfile': (context) => const UpdateProfile(),
         'viewPhoto': (context) => const ViewPhoto(),
+        'forgotPasswordScreen': (context) => const ForgotPasswordScreen(),
       },
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      // home: const SplashScreen(),
-      home: LoginPage(),
+      home: const SplashScreen(),
+      // home: LoadingScreen(),
     );
   }
 }

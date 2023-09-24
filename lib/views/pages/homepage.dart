@@ -11,18 +11,21 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Face Roja",
+          "GO CHARU",
           style: TextStyle(color: Colors.white),
         ),
       ),
-      drawer: NavigationDrawerCustom(),
-      body: Column(
+      drawer: const NavigationDrawerCustom(),
+      body: const Column(
         children: [
-          Text(
-            "Links",
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const FeedLinks()
+          // SizedBox(height: 10),
+          // Text(
+          //   "Feed",
+          //   style: TextStyle(
+          //       fontSize: 32, fontWeight: FontWeight.bold, color: primaryColor),
+          // ),
+          SizedBox(height: 10),
+          FeedLinks()
         ],
       ),
     );

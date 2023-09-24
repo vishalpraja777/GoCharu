@@ -16,7 +16,7 @@ class AppTheme {
               // backgroundColor: primaryColor,
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               elevation: 8,
-              shadowColor: Colors.orange,
+              shadowColor: primaryColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)))));
 

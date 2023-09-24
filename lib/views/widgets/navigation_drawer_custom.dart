@@ -38,13 +38,25 @@ class _NavigationDrawerCustomState extends State<NavigationDrawerCustom> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            buildHeader(context),
-            buildMenuItems(context),
-          ],
+      child: Container(
+        // color: primaryColor,
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage(cardbackground7), fit: BoxFit.cover),
+        // ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              buildHeader(context),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                height: 1,
+                color: white,
+              ),
+              buildMenuItems(context),
+            ],
+          ),
         ),
       ),
     );
@@ -52,7 +64,7 @@ class _NavigationDrawerCustomState extends State<NavigationDrawerCustom> {
 
   Widget buildHeader(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
+      color: primaryColor,
       padding: EdgeInsets.only(
           top: 24 + MediaQuery.of(context).padding.top, bottom: 24),
       child: Column(
@@ -78,7 +90,9 @@ class _NavigationDrawerCustomState extends State<NavigationDrawerCustom> {
       child: Wrap(
         children: [
           ListTile(
-              leading: const Icon(Icons.person),
+              leading: const Icon(
+                Icons.person,
+              ),
               title: Text(
                 "Update Profile",
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -87,7 +101,9 @@ class _NavigationDrawerCustomState extends State<NavigationDrawerCustom> {
                 Navigator.pushNamed(context, 'updateProfile');
               }),
           ListTile(
-              leading: const Icon(Icons.logout),
+              leading: const Icon(
+                Icons.logout,
+              ),
               title: Text(
                 "Logout",
                 style: Theme.of(context).textTheme.bodyMedium,
