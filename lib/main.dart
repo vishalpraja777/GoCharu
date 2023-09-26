@@ -5,6 +5,7 @@ import 'package:follow_dp/controller/auth_controller.dart';
 import 'package:follow_dp/controller/crud_crontroller.dart';
 import 'package:follow_dp/controller/firebase_api_messaging.dart';
 import 'package:follow_dp/theme/app_theme.dart';
+import 'package:follow_dp/views/pages/ads/interstitial_ad_page.dart';
 import 'package:follow_dp/views/pages/authentication/email_verification.dart';
 import 'package:follow_dp/views/pages/authentication/signuppage.dart';
 import 'package:follow_dp/views/pages/forgot_password_screen.dart';
@@ -13,6 +14,7 @@ import 'package:follow_dp/views/pages/onboarding_page.dart';
 import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 import 'package:follow_dp/views/pages/authentication/phone_verification/otp_verification.dart';
 import 'package:follow_dp/views/pages/authentication/phone_verification/phone_number_page.dart';
+import 'package:follow_dp/views/pages/test_page.dart';
 import 'package:follow_dp/views/pages/update_profile.dart';
 import 'package:follow_dp/views/pages/user_info.dart';
 import 'package:follow_dp/views/pages/view_photo.dart';
@@ -62,13 +64,14 @@ class MyApp extends StatelessWidget {
         'updateProfile': (context) => const UpdateProfile(),
         'viewPhoto': (context) => const ViewPhoto(),
         'forgotPasswordScreen': (context) => const ForgotPasswordScreen(),
+        'testpage': (context) => const TestPage(),
       },
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
       home: const SplashScreen(),
-      // home: EmailVerification(),
+      // home: InterstitialAdPage(),
     );
   }
 }
