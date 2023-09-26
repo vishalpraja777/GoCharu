@@ -25,14 +25,18 @@ const String logincrop = "assets/images/logincrop.png";
 const String googlelogo = "assets/images/googlelogo.png";
 const String applogo = "assets/images/applogo.png";
 
-const String cardbackground1 = "assets/images/cardbackground1.jpg";
-const String cardbackground2 = "assets/images/cardbackground2.jpg";
-const String cardbackground3 = "assets/images/cardbackground3.jpg";
-const String cardbackground4 = "assets/images/cardbackground4.jpg";
-const String cardbackground5 = "assets/images/cardbackground5.jpg";
-const String cardbackground6 = "assets/images/cardbackground6.jpg";
-const String cardbackground7 = "assets/images/cardbackground7.jpg";
-const String cardbackground8 = "assets/images/cardbackground8.jpg";
+// const String cardbackground1 = "assets/images/cardbackground1.jpg";
+// const String cardbackground2 = "assets/images/cardbackground2.jpg";
+// const String cardbackground3 = "assets/images/cardbackground3.jpg";
+// const String cardbackground4 = "assets/images/cardbackground4.jpg";
+// const String cardbackground5 = "assets/images/cardbackground5.jpg";
+// const String cardbackground6 = "assets/images/cardbackground6.jpg";
+// const String cardbackground7 = "assets/images/cardbackground7.jpg";
+// const String cardbackground8 = "assets/images/cardbackground8.jpg";
+
+// const String cardimage1 = "assets/images/cardimage1.jpg";
+// const String cardimage2 = "assets/images/cardimage2.jpg";
+// const String cardimage3 = "assets/images/cardimage3.jpg";
 
 var firebaseAuth = FirebaseAuth.instance;
 var firebaseStorage = FirebaseStorage.instance;
@@ -40,3 +44,5 @@ var firestore = FirebaseFirestore.instance;
 
 var authController = AuthController.instance;
 var crudController = CrudController.instance;
+
+getImage() {}

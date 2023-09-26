@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:follow_dp/constants/constants.dart';
@@ -27,31 +29,34 @@ class FeedLinks extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final DocumentSnapshot documentSnapshot =
                       snapshot.data!.docs[index];
+                  final url = documentSnapshot["imagelink"].toString();
                   return InkWell(
                     onTap: () {
                       _launchUrl(documentSnapshot["link"]);
                     },
                     child: Container(
+                      // width: MediaQuery.of(context).size.width - 100,
+                      height: MediaQuery.of(context).size.width * (9 / 16),
                       margin: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 4),
-                      padding: const EdgeInsets.all(20),
+                      // padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          image: const DecorationImage(
-                              image: AssetImage(cardbackground6),
-                              fit: BoxFit.cover)),
-                      child: ListTile(
-                        title: Center(
-                          child: Text(
-                            documentSnapshot["name"].toString().toUpperCase(),
-                            style: const TextStyle(
-                                fontSize: 20,
-                                color: white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        // subtitle: Text(documentSnapshot["link"]),
-                      ),
+                          color: Colors.grey[100],
+                          image: DecorationImage(
+                              image: NetworkImage(url), fit: BoxFit.cover)),
+                      // child: ListTile(
+                      //   title: Center(
+                      //     child: Text(
+                      //       documentSnapshot["name"].toString().toUpperCase(),
+                      //       style: const TextStyle(
+                      //           fontSize: 20,
+                      //           color: white,
+                      //           fontWeight: FontWeight.bold),
+                      //     ),
+                      //   ),
+                      // subtitle: Text(documentSnapshot["link"]),
+                      // ),
                     ),
                   );
                 });

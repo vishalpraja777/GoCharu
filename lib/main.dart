@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/controller/auth_controller.dart';
 import 'package:follow_dp/controller/crud_crontroller.dart';
 import 'package:follow_dp/controller/firebase_api_messaging.dart';
@@ -10,7 +9,6 @@ import 'package:follow_dp/views/pages/authentication/email_verification.dart';
 import 'package:follow_dp/views/pages/authentication/signuppage.dart';
 import 'package:follow_dp/views/pages/forgot_password_screen.dart';
 import 'package:follow_dp/views/pages/homepage.dart';
-import 'package:follow_dp/views/pages/loading_screen.dart';
 import 'package:follow_dp/views/pages/onboarding_page.dart';
 import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 import 'package:follow_dp/views/pages/authentication/phone_verification/otp_verification.dart';

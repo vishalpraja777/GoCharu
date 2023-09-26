@@ -84,14 +84,17 @@ flutter:
     - assets/images/logincrop.png
     - assets/images/googlelogo.png
     - assets/images/applogo.png
-    - assets/images/cardbackground1.jpg
-    - assets/images/cardbackground2.jpg
-    - assets/images/cardbackground3.jpg
-    - assets/images/cardbackground4.jpg
-    - assets/images/cardbackground5.jpg
-    - assets/images/cardbackground6.jpg
-    - assets/images/cardbackground7.jpg
-    - assets/images/cardbackground8.jpg
+    # - assets/images/cardbackground1.jpg
+    # - assets/images/cardbackground2.jpg
+    # - assets/images/cardbackground3.jpg
+    # - assets/images/cardbackground4.jpg
+    # - assets/images/cardbackground5.jpg
+    # - assets/images/cardbackground6.jpg
+    # - assets/images/cardbackground7.jpg
+    # - assets/images/cardbackground8.jpg
+    # - assets/images/cardimage1.jpg
+    # - assets/images/cardimage2.jpg
+    # - assets/images/cardimage3.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
