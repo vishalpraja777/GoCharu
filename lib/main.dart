@@ -19,6 +19,7 @@ import 'package:follow_dp/views/pages/update_profile.dart';
 import 'package:follow_dp/views/pages/user_info.dart';
 import 'package:follow_dp/views/pages/view_photo.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 // import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 import 'firebase_options.dart';
 import 'views/pages/authentication/splash_screen.dart';
@@ -27,6 +28,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) {
