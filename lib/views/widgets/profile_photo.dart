@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:follow_dp/constants/constants.dart';
-import 'package:follow_dp/views/pages/view_photo.dart';
 
 class ProfilePhoto extends StatefulWidget {
   final double radius;
@@ -21,7 +20,7 @@ class _ProfilePhotoState extends State<ProfilePhoto> {
 
     var isPhotoUrl = false;
     var photoUrl;
-    var isEditable;
+    // var isEditable;
 
     if (firebaseAuth.currentUser!.photoURL != null) {
       setState(() {

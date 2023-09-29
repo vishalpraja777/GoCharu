@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/models/user_model.dart';
-import 'package:follow_dp/views/pages/loading_screen.dart';
 import 'package:follow_dp/views/widgets/profile_photo.dart';
 import 'package:follow_dp/views/widgets/textInputField.dart';
 
@@ -70,14 +69,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   @override
   Widget build(BuildContext context) {
-    var defaultImgUrl =
-        "https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg";
+    // var defaultImgUrl =
+    //     "https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg";
 
-    var isPhotoUrl = false;
-    var photoUrl;
+    // var isPhotoUrl = false;
+    // var photoUrl;
     if (firebaseAuth.currentUser!.photoURL != null) {
-      isPhotoUrl = true;
-      photoUrl = firebaseAuth.currentUser!.photoURL;
+      // isPhotoUrl = true;
+      // photoUrl = firebaseAuth.currentUser!.photoURL;
     }
 
     return Scaffold(

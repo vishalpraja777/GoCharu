@@ -2,15 +2,11 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/models/user_model.dart';
-// import 'package:follow_dp/views/pages/authentication/loginpage.dart';
-// import 'package:follow_dp/views/pages/homepage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
@@ -50,7 +46,7 @@ class AuthController extends GetxController {
     if (pickedImage != null) {
       Get.snackbar("Profile Picture",
           "You have successfully selected the profile picture");
-      _pickedImage = Rx<File?>(File(pickedImage!.path));
+      _pickedImage = Rx<File?>(File(pickedImage.path));
       String downloadUrl = await _uploadToStorage(profilePhoto!);
       firebaseAuth.currentUser?.updatePhotoURL(downloadUrl);
 

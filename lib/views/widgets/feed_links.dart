@@ -1,10 +1,6 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:follow_dp/constants/constants.dart';
-import 'package:follow_dp/controller/crud_crontroller.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -102,7 +98,8 @@ class _FeedLinksState extends State<FeedLinks> {
                       if (isAdLoaded) {
                         await interstitialAd.show();
                       } else {
-                        Fluttertoast.showToast(msg: "Loading... Try again");
+                        _launchUrl(launchUrlLink);
+                        // Fluttertoast.showToast(msg: "Loading... Try again");
                       }
                       // if (isLaunch) {
                       //   _launchUrl(documentSnapshot["link"]);

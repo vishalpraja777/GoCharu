@@ -5,7 +5,6 @@ import 'package:follow_dp/controller/auth_controller.dart';
 import 'package:follow_dp/controller/crud_crontroller.dart';
 import 'package:follow_dp/controller/firebase_api_messaging.dart';
 import 'package:follow_dp/theme/app_theme.dart';
-import 'package:follow_dp/views/pages/ads/interstitial_ad_page.dart';
 import 'package:follow_dp/views/pages/authentication/email_verification.dart';
 import 'package:follow_dp/views/pages/authentication/signuppage.dart';
 import 'package:follow_dp/views/pages/forgot_password_screen.dart';
@@ -73,7 +72,6 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
       home: const SplashScreen(),
-      // home: InterstitialAdPage(),
     );
   }
 }

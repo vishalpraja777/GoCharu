@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/views/widgets/feed_links.dart';
 import 'package:follow_dp/views/widgets/navigation_drawer_custom.dart';
 

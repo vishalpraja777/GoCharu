@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:follow_dp/constants/constants.dart';
 import 'package:follow_dp/models/user_model.dart';
 import 'package:follow_dp/views/widgets/profile_photo.dart';
-import 'package:get/get.dart';
 
 class NavigationDrawerCustom extends StatefulWidget {
   const NavigationDrawerCustom({super.key});

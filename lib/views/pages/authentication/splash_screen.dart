@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:follow_dp/constants/constants.dart';
-import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 import 'package:follow_dp/views/pages/onboarding_page.dart';
 // import 'package:follow_dp/views/pages/authentication/loginpage.dart';
 

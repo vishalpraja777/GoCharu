@@ -2,10 +2,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:follow_dp/constants/constants.dart';
-import 'package:follow_dp/views/pages/authentication/loginpage.dart';
-import 'package:follow_dp/views/pages/authentication/splash_screen.dart';
-import 'package:follow_dp/views/pages/homepage.dart';
 // import 'package:follow_dp/views/pages/authentication/phone_verification/phone_number_page.dart';
 
 class OnboardingPage extends StatefulWidget {

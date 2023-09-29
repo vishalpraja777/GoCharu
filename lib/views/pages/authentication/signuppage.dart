@@ -2,11 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:follow_dp/controller/auth_controller.dart';
 import 'package:follow_dp/views/pages/loading_screen.dart';
-import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:table_calendar/table_calendar.dart';
 // import 'package:image_picker/image_picker.dart';
 
 import '../../../constants/constants.dart';
