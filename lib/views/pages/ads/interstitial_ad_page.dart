@@ -25,7 +25,7 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
 
   initInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: testAdUnit,
+        adUnitId: realAdUnit,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
           print("Test Init");
