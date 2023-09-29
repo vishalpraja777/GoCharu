@@ -1,4 +1,4 @@
-package com.example.follow_dp
+package com.gocharu.gocharu
 
 import io.flutter.embedding.android.FlutterActivity
 
