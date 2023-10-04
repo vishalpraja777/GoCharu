@@ -201,6 +201,8 @@ class AuthController extends GetxController {
       // finally let's sign in
       var signinRes =
           await FirebaseAuth.instance.signInWithCredential(credential);
+      print("signinRes");
+      print(signinRes);
       if (signinRes.additionalUserInfo!.isNewUser) {
         UserModel user = UserModel(
             username: signinRes.user!.displayName!,

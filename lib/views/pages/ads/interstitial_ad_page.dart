@@ -28,7 +28,7 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
         adUnitId: realAdUnit,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
-          print("Test Init");
+          // print("Test Init");
           interstitialAd = ad;
           setState(() {
             isAdLoaded = true;
@@ -36,7 +36,7 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
           interstitialAd.fullScreenContentCallback =
               FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) {
             ad.dispose();
-            print("Test Dismiss");
+            // print("Test Dismiss");
 
             Navigator.pushNamed(context, "testpage");
             setState(() {
@@ -44,14 +44,14 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
             });
           }, onAdFailedToShowFullScreenContent: (ad, error) {
             ad.dispose();
-            print("Test Failed");
+            // print("Test Failed");
 
             setState(() {
               isAdLoaded = false;
             });
           });
         }, onAdFailedToLoad: (error) {
-          print("Test Failed1");
+          // print("Test Failed1");
 
           interstitialAd.dispose();
         }));
@@ -67,7 +67,7 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
               if (isAdLoaded) {
                 interstitialAd.show();
               }
-              print("Test$isAdLoaded");
+              // print("Test$isAdLoaded");
               // Navigator.pushNamed(context, "testpage");
             },
             child: Text("Show Ad")),

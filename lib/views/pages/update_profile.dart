@@ -63,8 +63,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
   @override
   void initState() {
     // TODO: implement initState
-    getData();
     super.initState();
+    getData();
   }
 
   @override

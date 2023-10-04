@@ -50,11 +50,12 @@ class DefaultFirebaseOptions {
     projectId: 'followdp1',
     authDomain: 'followdp1.firebaseapp.com',
     storageBucket: 'followdp1.appspot.com',
+    measurementId: 'G-BZMQELP3WD',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCSA-VHJkl3jqXe_jL8ucG9rmzoJXh2HZE',
-    appId: '1:958147611840:android:0897c08a65ee8b3a00b125',
+    appId: '1:958147611840:android:ddddbf6b2c704f0800b125',
     messagingSenderId: '958147611840',
     projectId: 'followdp1',
     storageBucket: 'followdp1.appspot.com',
@@ -66,6 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '958147611840',
     projectId: 'followdp1',
     storageBucket: 'followdp1.appspot.com',
+    androidClientId: '958147611840-t89kjeb6kedr3dn2gf1nakrjtl91o6c2.apps.googleusercontent.com',
+    iosClientId: '958147611840-hosjerop9v0g9cd69ubv81d52c05io4c.apps.googleusercontent.com',
     iosBundleId: 'com.example.followDp',
   );
 
@@ -75,6 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '958147611840',
     projectId: 'followdp1',
     storageBucket: 'followdp1.appspot.com',
+    androidClientId: '958147611840-t89kjeb6kedr3dn2gf1nakrjtl91o6c2.apps.googleusercontent.com',
+    iosClientId: '958147611840-vnmph9492jobcj747s2u008t6mb7rdnc.apps.googleusercontent.com',
     iosBundleId: 'com.example.followDp.RunnerTests',
   );
 }
