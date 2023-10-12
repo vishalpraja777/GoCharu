@@ -15,6 +15,7 @@ class UpdateProfile extends StatefulWidget {
 
 class _UpdateProfileState extends State<UpdateProfile> {
   String? email = firebaseAuth.currentUser!.email;
+  String? uid = firebaseAuth.currentUser!.uid;
   late UserModel userData;
   bool isLoading = false;
 
@@ -31,7 +32,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
   String strDateTime = '--/--/----';
 
   getData() async {
-    userData = await crudController.getUserDetails(email!);
+    // userData = await crudController.getUserDetails(email!);
+    userData = await crudController.getUserDetails(uid!);
+    print(userData.email);
     setState(() {
       _emailController.text = userData.email;
       _userNameController.text = userData.username;

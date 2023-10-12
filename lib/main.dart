@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
         'forgotPasswordScreen': (context) => const ForgotPasswordScreen(),
         'testpage': (context) => const TestPage(),
       },
-      title: 'Flutter Demo',
+      title: 'Go Charu',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,

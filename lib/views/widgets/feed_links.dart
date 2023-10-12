@@ -27,11 +27,12 @@ class _FeedLinksState extends State<FeedLinks> {
   var launchUrlLink = '';
 
   var testAdUnit = "ca-app-pub-3940256099942544/1033173712"; // test id
-  var realAdUnit = "ca-app-pub-1926900948788493/1947756542"; // real id
+  // var realAdUnit = "ca-app-pub-1926900948788493/1947756542"; // real id
+  var realAdUnit = "ca-app-pub-3095807921447996/7077831706"; // real id
 
   initInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: testAdUnit,
+        adUnitId: realAdUnit,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
           print("Test Init");

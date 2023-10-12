@@ -210,6 +210,10 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         isLoading = false;
                       });
+                    } else {
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
                   },
                   icon: Image.asset(googlelogo)),

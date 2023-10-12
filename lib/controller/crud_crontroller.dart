@@ -8,9 +8,21 @@ class CrudController extends GetxController {
   final CollectionReference links = firestore.collection("feedlinks");
   final CollectionReference profile = firestore.collection("users");
 
-  Future<UserModel> getUserDetails(String email) async {
-    final snapshot = await profile.where("email", isEqualTo: email).get();
+  // Future<UserModel> getUserDetails(String email) async {
+  //   print(email);
+  //   final snapshot = await profile.where("email", isEqualTo: email).get();
+  //   final userData = snapshot.docs.map((e) => UserModel.fromSnap(e)).single;
+  //   // print(userData);
+
+  //   return userData;
+  // }
+
+  Future<UserModel> getUserDetails(String uid) async {
+    print(uid);
+    final snapshot = await profile.where("uid", isEqualTo: uid).get();
     final userData = snapshot.docs.map((e) => UserModel.fromSnap(e)).single;
+    // print(userData);
+
     return userData;
   }
 

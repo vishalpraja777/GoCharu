@@ -71,7 +71,8 @@ class _NavigationDrawerCustomState extends State<NavigationDrawerCustom> {
           const ProfilePhoto(radius: 52),
           const SizedBox(height: 12),
           Text(
-            userName!,
+            // userName!,
+            firebaseAuth.currentUser!.displayName!,
             style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(height: 12),

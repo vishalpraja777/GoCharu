@@ -269,6 +269,10 @@ class _SignupPageState extends State<SignupPage> {
                       setState(() {
                         isLoading = false;
                       });
+                    } else {
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
                   },
                   icon: Image.asset(googlelogo)),

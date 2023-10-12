@@ -21,7 +21,8 @@ class _InterstitialAdPageState extends State<InterstitialAdPage> {
   bool isAdLoaded = false;
 
   var testAdUnit = "ca-app-pub-3940256099942544/1033173712"; // test id
-  var realAdUnit = "ca-app-pub-1926900948788493/1947756542"; // real id
+  // var realAdUnit = "ca-app-pub-1926900948788493/1947756542"; // real id
+  var realAdUnit = "ca-app-pub-3095807921447996/7077831706";
 
   initInterstitialAd() {
     InterstitialAd.load(

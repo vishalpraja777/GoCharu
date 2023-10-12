@@ -76,7 +76,7 @@ class AuthController extends GetxController {
       await firebaseAuth.currentUser!.updatePhotoURL(photoUrl);
     }
     UserModel userData =
-        await crudController.getUserDetails(firebaseAuth.currentUser!.email!);
+        await crudController.getUserDetails(firebaseAuth.currentUser!.uid);
     UserModel userModel = UserModel(
         uid: firebaseAuth.currentUser!.uid,
         username: userData.username,
@@ -221,8 +221,7 @@ class AuthController extends GetxController {
       print(signinRes.user!.uid);
       return signinRes;
     } catch (error) {
-      Fluttertoast.showToast(
-          msg: "Email maybe already registered! Try logging in");
+      Fluttertoast.showToast(msg: "Error signing, try signup");
       return null;
     }
   }
